@@ -18,6 +18,7 @@ namespace PB_Task.Services
         }
         public async Task<bool> InsertToAddressBookAsync(AddressToAdd address)
         {
+            address.PhoneNumber = address.PhoneNumber.Replace(" ", ""); 
             var isAvailable = await _context.Addresses.Where(x=>x.PhoneNumber==address.PhoneNumber).FirstOrDefaultAsync();
 
             if (isAvailable==null)
