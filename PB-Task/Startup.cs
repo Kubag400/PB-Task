@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PB_Task.Data;
+using PB_Task.Interfaces;
+using PB_Task.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +31,7 @@ namespace PB_Task
         {
             services.AddDbContext<AddressBookContext>(options => options.UseSqlite("Data source = AddressBook.db"));
             services.AddRouting(options => options.LowercaseUrls = true);
+            services.AddScoped<IAddressBookRepository, AddressBookRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
