@@ -8,6 +8,7 @@ namespace PB_Task.Interfaces
 {
     public interface IAddressBookRepository
     {
-        Task<bool> InsertToAddressBookAsync(Address address);
+        Task<bool> InsertToAddressBookAsync(AddressToAdd address);
+        Task<List<AddressDb>> FindByCityAsync(string city);
     }
 }
