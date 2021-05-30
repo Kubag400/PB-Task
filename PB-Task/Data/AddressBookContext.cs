@@ -12,6 +12,6 @@ namespace PB_Task.Data
         public AddressBookContext(DbContextOptions<AddressBookContext> options) : base(options)
         {
         }
-        public DbSet<Address> Addresses { get; set; }
+        public DbSet<AddressDb> Addresses { get; set; }
     }
 }
