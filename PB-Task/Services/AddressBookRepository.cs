@@ -2,7 +2,6 @@
 using PB_Task.Data;
 using PB_Task.Interfaces;
 using PB_Task.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,6 +17,7 @@ namespace PB_Task.Services
         }
         public async Task<bool> InsertToAddressBookAsync(AddressToAdd address)
         {
+            address.PhoneNumber = address.PhoneNumber.Replace(" ", ""); 
             var isAvailable = await _context.Addresses.Where(x=>x.PhoneNumber==address.PhoneNumber).FirstOrDefaultAsync();
 
             if (isAvailable==null)
