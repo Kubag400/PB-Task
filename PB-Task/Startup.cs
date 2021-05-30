@@ -28,6 +28,7 @@ namespace PB_Task
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AddressBookContext>(options => options.UseSqlite("Data source = AddressBook.db"));
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
