@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ namespace PB_Task.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class AddressBookController : Controller
     {
         [HttpGet]
         public string Get()
@@ -18,3 +17,4 @@ namespace PB_Task.Controllers
         }
     }
 }
+
