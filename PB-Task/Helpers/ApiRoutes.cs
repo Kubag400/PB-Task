@@ -15,6 +15,7 @@ namespace PB_Task.Helpers
             private const string _controllerName = Base + "AddressBook/";
 
             public const string Add = _controllerName + "add";
+            public const string FindByCity = _controllerName + "{city}";
         }
     }
 }
