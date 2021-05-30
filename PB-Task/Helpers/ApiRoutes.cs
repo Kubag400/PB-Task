@@ -16,6 +16,7 @@ namespace PB_Task.Helpers
 
             public const string Add = _controllerName + "add";
             public const string FindByCity = _controllerName + "{city}";
+            public const string GetLastAddress = _controllerName + "lastaddress";
         }
     }
 }
