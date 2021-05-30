@@ -35,5 +35,9 @@ namespace PB_Task.Services
             }
             return false;
         }
+        public async Task<List<AddressDb>> FindByCityAsync(string city)
+        {
+            return await _context.Addresses.Where(x => x.City == city).ToListAsync();
+        }
     }
 }
