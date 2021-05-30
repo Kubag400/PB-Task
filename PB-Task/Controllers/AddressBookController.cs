@@ -1,19 +1,42 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
+using PB_Task.Helpers;
+using PB_Task.Interfaces;
+using PB_Task.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PB_Task.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+
     public class AddressBookController : Controller
     {
-        [HttpGet]
-        public string Get()
+        private readonly IAddressBookRepository _repository;
+        public AddressBookController(IAddressBookRepository repository)
         {
-            return "Test";
+            _repository = repository;
+        }
+        [HttpPost(ApiRoutes.AddressBook.Add)]
+        public async Task<IActionResult> InsertAddressToBook([FromBody] AddressToAdd address)
+        {
+            if (ModelState.IsValid)
+            {
+                bool insert = await _repository.InsertToAddressBookAsync(address);
+                if (insert)
+                {
+                    return Ok();
+                }
+                return BadRequest();
+            }
+            return Conflict("PhoneNumer");
+        }
+        [HttpGet(ApiRoutes.AddressBook.FindByCity)]
+        public async Task<List<AddressDb>> FindByCity(string city)
+        {
+            if (!string.IsNullOrEmpty(city))
+            {
+                return await _repository.FindByCityAsync(city);
+            }
+            return null;
         }
     }
 }
