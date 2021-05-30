@@ -1,4 +1,5 @@
-﻿using PB_Task.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PB_Task.Data;
 using PB_Task.Interfaces;
 using PB_Task.Models;
 using System;
@@ -15,9 +16,24 @@ namespace PB_Task.Services
         {
             _context = context;
         }
-        public Task<bool> InsertToAddressBookAsync(Address address)
+        public async Task<bool> InsertToAddressBookAsync(AddressToAdd address)
         {
-            throw new NotImplementedException();
+            var isAvailable = await _context.Addresses.Where(x=>x.PhoneNumber==address.PhoneNumber).FirstOrDefaultAsync();
+
+            if (isAvailable==null)
+            {
+                var newAddress = new AddressDb
+                {
+                    FirstName = address.FirstName,
+                    LastName = address.LastName,
+                    City = address.City,
+                    PhoneNumber = address.PhoneNumber
+                };
+                 _context.Addresses.Add(newAddress);
+                var inserted = await _context.SaveChangesAsync();
+                return inserted > 0;
+            }
+            return false;
         }
     }
 }
