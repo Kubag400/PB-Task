@@ -38,6 +38,17 @@ namespace PB_Task.Controllers
             }
             return null;
         }
+        [HttpGet(ApiRoutes.AddressBook.GetLastAddress)]
+        public async Task<AddressDb> GetLastAddress()
+        {
+            var lastAddress = await _repository.GetLastAddress();
+            if(lastAddress!=null)
+            {
+                return lastAddress;
+            }
+            return null;
+        }
+     
     }
 }
 
