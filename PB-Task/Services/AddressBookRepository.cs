@@ -39,5 +39,11 @@ namespace PB_Task.Services
         {
             return await _context.Addresses.Where(x => x.City == city).ToListAsync();
         }
+
+        public async Task<AddressDb> GetLastAddress()
+        {
+            var count = await _context.Addresses.CountAsync();
+            return _context.Addresses.ToArray().LastOrDefault();
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace PB_Task.Interfaces
     {
         Task<bool> InsertToAddressBookAsync(AddressToAdd address);
         Task<List<AddressDb>> FindByCityAsync(string city);
+        Task<AddressDb> GetLastAddress();
     }
 }

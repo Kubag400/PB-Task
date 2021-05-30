@@ -25,19 +25,30 @@ namespace PB_Task.Controllers
                 {
                     return Ok();
                 }
-                return BadRequest();
+                return Conflict("Phone number already exists!");
             }
-            return Conflict("PhoneNumer");
+            return BadRequest("Insert value correctly");
         }
         [HttpGet(ApiRoutes.AddressBook.FindByCity)]
-        public async Task<List<AddressDb>> FindByCity(string city)
+        public async Task<ActionResult<List<AddressDb>>> FindByCity(string city)
         {
             if (!string.IsNullOrEmpty(city))
             {
                 return await _repository.FindByCityAsync(city);
             }
-            return null;
+            return NotFound() ;
         }
+        [HttpGet(ApiRoutes.AddressBook.GetLastAddress)]
+        public async Task<ActionResult<AddressDb>> GetLastAddress()
+        {
+            var lastAddress = await _repository.GetLastAddress();
+            if(lastAddress!=null)
+            {
+                return lastAddress;
+            }
+            return NotFound();
+        }
+     
     }
 }
 
