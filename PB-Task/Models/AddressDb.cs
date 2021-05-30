@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PB_Task.Models
 {
-    public class Address
+    public class AddressDb
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
