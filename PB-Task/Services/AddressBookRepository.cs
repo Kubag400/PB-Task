@@ -42,8 +42,7 @@ namespace PB_Task.Services
 
         public async Task<AddressDb> GetLastAddress()
         {
-            var count = await _context.Addresses.CountAsync();
-            return _context.Addresses.ToArray().LastOrDefault();
+            return await _context.Addresses.OrderByDescending(x => x.Id).FirstOrDefaultAsync();
         }
     }
 }
